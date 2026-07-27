@@ -3,14 +3,18 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Command } from "cmdk";
-import { Search, FileBarChart, ScanLine } from "lucide-react";
+import { Search, FileBarChart, ScanLine, History } from "lucide-react";
 import { navItems } from "@/lib/nav";
 import { useUIStore } from "@/lib/store/ui-store";
+import { useScanHistoryStore } from "@/lib/store/scan-history-store";
+import { scanTypeMeta } from "@/lib/scan-type-meta";
+import { RiskBadge } from "@/components/shared/risk-badge";
 import { cn } from "@/lib/utils";
 
 export function CommandPalette() {
   const router = useRouter();
   const { commandPaletteOpen, setCommandPaletteOpen, setAiAssistantOpen } = useUIStore();
+  const entries = useScanHistoryStore((s) => s.entries);
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
@@ -110,6 +114,29 @@ export function CommandPalette() {
                 </Command.Item>
               ))}
             </Command.Group>
+
+            {entries.length > 0 && (
+              <Command.Group heading="Recent scans" className="[&_[cmdk-group-heading]]:px-2.5 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-[11px] [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-wide [&_[cmdk-group-heading]]:text-[var(--color-text-muted)]">
+                {entries.slice(0, 8).map((entry) => {
+                  const meta = scanTypeMeta[entry.type];
+                  return (
+                    <Command.Item
+                      key={entry.id}
+                      value={`${entry.target} ${meta.label} ${entry.summary}`}
+                      onSelect={() => {
+                        router.push(meta.href);
+                        setCommandPaletteOpen(false);
+                      }}
+                      className="flex cursor-pointer items-center gap-3 rounded-lg px-2.5 py-2.5 text-sm text-[var(--color-text)] data-[selected=true]:bg-white/5"
+                    >
+                      <History className="h-4 w-4 text-[var(--color-text-secondary)]" />
+                      <span className="flex-1 truncate">{entry.target}</span>
+                      <RiskBadge level={entry.level} />
+                    </Command.Item>
+                  );
+                })}
+              </Command.Group>
+            )}
           </Command.List>
         </Command>
       </div>
