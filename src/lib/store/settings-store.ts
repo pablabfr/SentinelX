@@ -20,6 +20,8 @@ interface SettingsState {
   companyLogo: string | null;
   notifications: NotificationPrefs;
   developerMode: boolean;
+  reduceMotion: boolean;
+  highContrast: boolean;
   setApiKey: (key: keyof ApiKeys, value: string) => void;
   clearApiKey: (key: keyof ApiKeys) => void;
   setAiModel: (model: AIModel) => void;
@@ -27,6 +29,8 @@ interface SettingsState {
   setCompanyLogo: (dataUrl: string | null) => void;
   toggleNotification: (key: keyof NotificationPrefs) => void;
   setDeveloperMode: (value: boolean) => void;
+  setReduceMotion: (value: boolean) => void;
+  setHighContrast: (value: boolean) => void;
 }
 
 export const useSettingsStore = create<SettingsState>()(
@@ -45,6 +49,8 @@ export const useSettingsStore = create<SettingsState>()(
         criticalCve: true,
       },
       developerMode: false,
+      reduceMotion: false,
+      highContrast: false,
       setApiKey: (key, value) => set((s) => ({ apiKeys: { ...s.apiKeys, [key]: value } })),
       clearApiKey: (key) =>
         set((s) => {
@@ -58,6 +64,8 @@ export const useSettingsStore = create<SettingsState>()(
       toggleNotification: (key) =>
         set((s) => ({ notifications: { ...s.notifications, [key]: !s.notifications[key] } })),
       setDeveloperMode: (developerMode) => set({ developerMode }),
+      setReduceMotion: (reduceMotion) => set({ reduceMotion }),
+      setHighContrast: (highContrast) => set({ highContrast }),
     }),
     { name: "sentinelx-settings" }
   )

@@ -5,10 +5,12 @@ import { Sidebar } from "@/components/layout/sidebar";
 import { TopBar } from "@/components/layout/topbar";
 import { CommandPalette } from "@/components/layout/command-palette";
 import { MobileNav } from "@/components/layout/mobile-nav";
+import { AccessibilityEffects } from "@/components/layout/accessibility-effects";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen">
+      <AccessibilityEffects />
       <AnimatedBackground />
       <Sidebar />
       <div className="flex min-h-screen flex-1 flex-col">
