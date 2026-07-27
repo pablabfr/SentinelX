@@ -1,0 +1,139 @@
+@import "tailwindcss";
+@import "highlight.js/styles/github-dark.css";
+
+@theme inline {
+  --color-bg: #090909;
+  --color-bg-raised: #111111;
+  --color-panel: #171717;
+  --color-panel-hover: #1d1d1d;
+  --color-border: #262626;
+  --color-border-soft: #1f1f1f;
+
+  --color-accent-blue: #00c2ff;
+  --color-accent-purple: #6e4cff;
+  --color-success: #00ff9d;
+  --color-warning: #ffb800;
+  --color-danger: #ff4d6d;
+
+  --color-text: #ffffff;
+  --color-text-secondary: #9ca3af;
+  --color-text-muted: #6b7280;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  --animate-pulse-glow: pulse-glow 2.4s ease-in-out infinite;
+  --animate-scan-line: scan-line 2.6s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 2s linear infinite;
+  --animate-marquee: marquee 30s linear infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 6px currentColor); }
+  50% { opacity: 0.55; filter: drop-shadow(0 0 2px currentColor); }
+}
+
+@keyframes scan-line {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html, body {
+  height: 100%;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-accent-blue) 35%, transparent);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #262626;
+  border-radius: 999px;
+  border: 2px solid var(--color-bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}
+
+.glass {
+  background: color-mix(in srgb, var(--color-panel) 65%, transparent);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid var(--color-border-soft);
+}
+
+.glow-blue { box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-accent-blue) 30%, transparent), 0 0 24px -8px var(--color-accent-blue); }
+.glow-purple { box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-accent-purple) 30%, transparent), 0 0 24px -8px var(--color-accent-purple); }
+.glow-success { box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-success) 30%, transparent), 0 0 24px -8px var(--color-success); }
+.glow-danger { box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-danger) 30%, transparent), 0 0 24px -8px var(--color-danger); }
+.glow-warning { box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-warning) 30%, transparent), 0 0 24px -8px var(--color-warning); }
+
+.text-gradient {
+  background: linear-gradient(90deg, var(--color-accent-blue), var(--color-accent-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #151515 0%, #1e1e1e 40%, #151515 80%);
+  background-size: 800px 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+.markdown-body :is(h1, h2, h3, h4) { font-weight: 600; margin-top: 1em; margin-bottom: 0.4em; }
+.markdown-body p { margin-bottom: 0.75em; line-height: 1.6; }
+.markdown-body ul, .markdown-body ol { margin: 0.5em 0 0.75em 1.25em; }
+.markdown-body ul { list-style: disc; }
+.markdown-body ol { list-style: decimal; }
+.markdown-body code { background: #1a1a1a; padding: 0.1em 0.4em; border-radius: 4px; font-size: 0.85em; }
+.markdown-body pre { background: #0d0d0d; border: 1px solid var(--color-border-soft); border-radius: 10px; padding: 0.9em; overflow-x: auto; margin-bottom: 0.75em; }
+.markdown-body pre code { background: transparent; padding: 0; }
+.markdown-body table { width: 100%; border-collapse: collapse; margin-bottom: 0.75em; }
+.markdown-body th, .markdown-body td { border: 1px solid var(--color-border-soft); padding: 0.4em 0.6em; text-align: left; }
+.markdown-body blockquote { border-left: 2px solid var(--color-accent-blue); padding-left: 0.75em; color: var(--color-text-secondary); }
