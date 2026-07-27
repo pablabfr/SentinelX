@@ -10,6 +10,7 @@ export interface ScanHistoryEntry {
   level: RiskLevel;
   summary: string;
   timestamp: string;
+  countryCode?: string;
   data?: unknown;
 }
 

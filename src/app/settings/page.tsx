@@ -129,8 +129,8 @@ function AiModelSection() {
       </CardHeader>
       <CardContent>
         <Select value={aiModel} onValueChange={(v) => setAiModel(v as AIModel)}>
-          <SelectTrigger className="w-full sm:w-64">
-            <SelectValue />
+          <SelectTrigger className="w-full min-w-0 sm:w-72">
+            <SelectValue className="min-w-0 truncate" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="gpt-4o-mini">GPT-4o mini (fastest, cheapest)</SelectItem>

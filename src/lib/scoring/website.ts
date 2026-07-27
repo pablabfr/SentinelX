@@ -29,7 +29,7 @@ export function buildWebsiteFindings(bundle: WebsiteScanBundle): Finding[] {
       findings.push({
         id: `header-${h.name}`,
         title: `Missing ${h.name}`,
-        description: h.recommendation,
+        description: `The response did not include a ${h.name} header.`,
         severity: h.severity,
         category: "HTTP Security Headers",
         recommendation: h.recommendation,

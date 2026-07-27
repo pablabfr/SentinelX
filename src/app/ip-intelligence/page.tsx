@@ -46,6 +46,7 @@ export default function IpIntelligencePage() {
         level: scored.level,
         summary: `${data.geo.city ?? "Unknown"}, ${data.geo.country ?? "Unknown"}`,
         timestamp: new Date().toISOString(),
+        countryCode: data.geo.countryCode ?? undefined,
       });
     },
   });
